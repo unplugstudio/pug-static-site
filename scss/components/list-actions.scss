@@ -1,0 +1,104 @@
+/* stylelint-disable max-nesting-depth */
+
+.list-actions {
+  cursor: default;
+  list-style: none;
+  padding-left: 0;
+
+  > li {
+    display: inline-block;
+    padding: 0 (get-size(element-margin) * 0.25) 0 0;
+    vertical-align: middle;
+
+    &:last-child {
+      padding-right: 0;
+    }
+  }
+
+  &.-small {
+    > li {
+      padding: 0 (get-size(element-margin) * 0.25) 0 0;
+    }
+  }
+
+  &.-vertical {
+    > li {
+      display: block;
+      padding: (get-size(element-margin) * 0.5) 0 0 0;
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      > * {
+        margin-bottom: 0;
+      }
+    }
+
+    &.-small {
+      > li {
+        padding: (get-size(element-margin) * 0.25) 0 0 0;
+
+        &:first-child {
+          padding-top: 0;
+        }
+      }
+    }
+  }
+
+  &.-fit {
+    display: table;
+    margin-left: (get-size(element-margin) * -0.5);
+    padding: 0;
+    table-layout: fixed;
+    width: calc(100% + #{(get-size(element-margin) * 0.5)});
+
+    > li {
+      display: table-cell;
+      padding: 0 0 0 (get-size(element-margin) * 0.5);
+
+      > * {
+        margin-bottom: 0;
+      }
+    }
+
+    &.-small {
+      margin-left: (get-size(element-margin) * -0.25);
+      width: calc(100% + #{(get-size(element-margin) * 0.25)});
+
+      > li {
+        padding: 0 0 0 (get-size(element-margin) * 0.25);
+      }
+    }
+  }
+
+  @include mq($until: sm) {
+    margin: 0 0 get-size(element-margin) 0;
+
+    > li {
+      display: block;
+      padding: (get-size(element-margin) * 0.5) 0 0 0;
+      text-align: center;
+      width: 100%;
+
+      &:first-child {
+        padding-top: 0;
+      }
+
+      > * {
+        margin: 0 !important;
+        width: 100%;
+      }
+    }
+
+    &.-small {
+      > li {
+        padding: (get-size(element-margin) * 0.25) 0 0 0;
+
+        &:first-child {
+          padding-top: 0;
+        }
+      }
+    }
+  }
+}

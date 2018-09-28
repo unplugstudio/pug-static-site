@@ -1,0 +1,40 @@
+.list-pagination {
+  border-color: get-color(border);
+  border-style: solid;
+  border-width: get-size(border-width) 0 get-size(border-width) get-size(border-width);
+  display: inline-flex;
+  list-style-type: none;
+  max-width: 100%;
+  overflow-x: auto;
+  padding-left: 0;
+  white-space: nowrap;
+
+  > li {
+    border-right: solid get-size(border-width) get-color(border);
+    padding-left: 0;
+
+    > a,
+    > span {
+      display: block;
+      padding: 0.5rem 1.5rem;
+    }
+
+    > span {
+      color: get-color(fg-light);
+      font-weight: get-font(weight-bold);
+    }
+  }
+
+  a {
+    color: get-color(fg);
+    transition: background-color get-duration(medium);
+
+    &:active,
+    &:focus,
+    &:hover {
+      background-color: get-color(border-bg);
+      color: get-color(highlight, 1);
+      text-decoration: none;
+    }
+  }
+}

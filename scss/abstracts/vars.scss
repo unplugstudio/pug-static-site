@@ -1,0 +1,71 @@
+// All these variables are available in all other stylesheets.
+// See libs/_functions.scss for handy accessors for these maps.
+
+$url-prefix: '../'; // Prefix to all things included via url() (images, fonts, etc)
+
+/* stylelint-disable length-zero-no-unit */
+/* sass-mq requires units on all breakpoints */
+$mq-breakpoints: (
+  xs:              0px,
+  sm:              544px,
+  md:              768px,
+  lg:              992px,
+  xl:              1200px
+);
+/* stylelint-enable */
+
+$misc: (
+  columns:         12,
+  z-index-menu:    1000
+);
+
+$duration: (
+  fast:            0.1s,
+  medium:          0.2s,
+  slow:            0.4s
+);
+
+$size: (
+  border-radius:   0,
+  border-width:    1px,
+  element-height:  2.88em,
+  element-margin:  1.5rem,
+  container:       1200px,
+  gutter: (
+    slim:          0,
+    normal:        2rem,
+    wide:          3rem
+  )
+);
+
+$font: (
+  family:          (Arial, Helvetica, sans-serif),
+  family-fixed:    (monospace),
+  family-heading:  ('Oswald', Arial, Helvetica, sans-serif),
+  weight:          400,
+  weight-bold:     700,
+  weight-light:    300
+);
+
+$color: (
+  bg:              #fff,
+  bg-alt:          #eeeef0,
+  bg-dark:         #2d2d2d,
+  fg:              #2d2d2d,
+  fg-bold:         #111,
+  fg-light:        #aaa,
+  border:          rgba(144, 144, 144, 0.65),
+  border-bg:       rgba(144, 144, 144, 0.2),
+  border2:         rgba(144, 144, 144, 0.9),
+  border2-bg:      rgba(144, 144, 144, 0.5),
+  state: (
+    success:       #5cb85c,
+    info:          #5bc0de,
+    warning:       #f0ad4e,
+    error:         #d9534f
+  ),
+  highlight: (
+    1:             #0081d6,
+    2:             #5eb15e
+  )
+);

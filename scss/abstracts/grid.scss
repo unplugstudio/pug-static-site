@@ -1,0 +1,82 @@
+////
+/// A collection of mixins for flexbox grids.
+/// @author Eduardo Rivas
+////
+
+/// Create a responsive container element.
+/// @param {number} $gutter [get-size(gutter, normal)] - Lateral padding around the container
+/// @param {number} $max-width [get-size(container)] - Max container width
+@mixin grid-container($padding: get-size(gutter, normal), $max-width: get-size(container)) {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $max-width;
+  padding-left: ($padding * 0.5);
+  padding-right: ($padding * 0.5);
+  width: 100%;
+}
+
+/// Create a grid row element for holding columns.
+/// @param {number} $gutter [get-size(gutter, normal)] - Desired gutter size (must be same as grid-col)
+@mixin grid-row($gutter: get-size(gutter, normal)) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: ($gutter * -0.5);
+  margin-right: ($gutter * -0.5);
+}
+
+/// Create a mashup of the container and row elements.
+/// Useful when a container will have grid columns exclusively as children (saves the wrapping row)
+/// @param {number} $max-width [get-size(container)] - Max container width
+@mixin grid-container-row($max-width: get-size(container)) {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: $max-width;
+  width: 100%;
+}
+
+/// Smart calculation of a column width.
+/// Unitless values are interpreted as column number and converted to the actual width,
+/// while values with units are left as-is.
+/// @param {number} $width - Number of columns, or size in `em`, `px`, `pt`, etc.
+@mixin grid-col-width($width) {
+  @if unitless($width) {
+    flex: 0 0 percentage($width / get-misc(columns));
+    max-width: percentage($width / get-misc(columns));
+  }
+
+  @else {
+    flex: 0 0 $width;
+    max-width: $width;
+  }
+}
+
+/// Create the grid column gutter using padding.
+/// @param {number} $gutter [get-size(gutter, normal)] - Desired gutter size
+@mixin grid-col-gutter($gutter: get-size(gutter, normal)) {
+  padding-left: ($gutter * 0.5);
+  padding-right: ($gutter * 0.5);
+}
+
+/// Create a grid column.
+/// @param {number | map} $sizing [100%] - Column width or a map with the widths for all breakpoints
+/// @param {number} $gutter [get-size(gutter, normal)] - Desired gutter size
+/// @example scss
+///	@include grid-col((xs: 12, md: 6, xl: 20%))
+///	// Becomes full-width in xs, half-width in md, and fifth-width in xl
+@mixin grid-col($sizing: 100%, $gutter: get-size(gutter, normal)) {
+  @include grid-col-gutter($gutter);
+
+  @if type-of($sizing) == 'map' {
+    @each $breakpoint, $width in $sizing {
+      @include mq($from: $breakpoint) {
+        @include grid-col-width($width);
+      }
+    }
+  }
+
+  @else if type-of($sizing) == 'number' {
+    @include grid-col-width($sizing);
+  }
+}

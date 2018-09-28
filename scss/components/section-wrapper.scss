@@ -1,0 +1,48 @@
+.section-wrapper {
+  @include padding(3rem, 0);
+
+  &.-alt {
+    background-color: get-color(bg-alt);
+  }
+
+  &.-slim {
+    @include mq($from: md) {
+      @include padding(2rem, 0);
+    }
+  }
+
+  &.-zeropadding {
+    padding: 0 0 0.01rem !important; // Prevent margin collapse
+  }
+
+  // Apply a clearfix in case content inside is floated
+  // For example, floated images or embeds
+  > .container {
+    &::before,
+    &::after {
+      content: ' ';
+      display: table;
+    }
+
+    &::after {
+      clear: both;
+    }
+  }
+
+  @include mq($from: md) {
+    @include padding(3.5rem, 0);
+  }
+
+  @include mq($from: lg) {
+    @include padding(5rem, 0);
+  }
+
+  // Create all color variations
+  @each $i in map-keys(get-color(highlight)) {
+    // stylelint-disable-next-line rscss/class-format
+    &.-style-#{$i} {
+      background-color: get-color(highlight, $i);
+      color: #fff;
+    }
+  }
+}

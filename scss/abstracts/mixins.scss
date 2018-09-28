@@ -1,0 +1,22 @@
+/// Applies padding to an element, taking the current element-margin value into account.
+/// @param {mixed} $tb Top/bottom padding.
+/// @param {mixed} $lr Left/right padding.
+/// @param {list} $pad Optional extra padding (in the following order top, right, bottom, left)
+@mixin padding($tb, $lr, $pad: (0, 0, 0, 0)) {
+  padding: ($tb + nth($pad, 1)) ($lr + nth($pad, 2)) max(0.1rem, $tb - get-size(element-margin) + nth($pad, 3)) ($lr + nth($pad, 4));
+}
+
+/// Vertically center the contents of an element
+@mixin v-center-contents {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@mixin filter-lighten {
+  filter: brightness(115%) saturate(100%);
+}
+
+@mixin filter-darken {
+  filter: brightness(85%) saturate(125%);
+}

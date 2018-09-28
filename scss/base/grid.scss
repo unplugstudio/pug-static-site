@@ -1,0 +1,44 @@
+/* stylelint-disable rscss/class-format */
+
+/* Disable RSCSS checks to comply with Bootstrap's conventions */
+
+.container {
+  @include grid-container;
+
+  &.-medium {
+    max-width: (get-size(container) * 0.85);
+  }
+
+  &.-narrow {
+    max-width: (get-size(container) * 0.6);
+  }
+}
+
+.row {
+  @include grid-row;
+}
+
+.container-row {
+  @include grid-container-row;
+}
+
+// Basic styles that all columns should have on all viewports.
+// Created as an extendable to group into a single selector.
+%base-col {
+  @include grid-col-gutter;
+
+  width: 100%; // Start being 100% wide, individual breakponts will clamp the width
+}
+
+// Make all columns in all viewports
+@each $breakpoint in map-keys($mq-breakpoints) {
+  @for $i from 1 through get-misc(columns) {
+    .col-#{$breakpoint}-#{$i} {
+      @extend %base-col;
+
+      @include mq($from: $breakpoint) {
+        @include grid-col-width($i);
+      }
+    }
+  }
+}

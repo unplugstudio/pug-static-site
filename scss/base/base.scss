@@ -1,0 +1,40 @@
+// MSIE: Required for IEMobile.
+// stylelint-disable-next-line at-rule-no-vendor-prefix
+@-ms-viewport {
+  width: device-width;
+}
+
+// MSIE: Prevents scrollbar from overlapping content.
+body {
+  -ms-overflow-style: scrollbar;
+
+  // Applies only to the TinyMCE editor
+  &.mce-content-body {
+    padding: 0.5rem 1rem !important;
+  }
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+body {
+  min-width: 320px;
+}
+
+img {
+  height: auto;
+  max-width: 100%;
+}
+
+// Required by IE11
+// http://stackoverflow.com/a/20095764
+main {
+  display: block;
+}

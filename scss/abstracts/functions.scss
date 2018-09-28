@@ -1,0 +1,63 @@
+/// Map deep get
+/// @author Hugo Giraudel
+/// @param {Map} $map - Map
+/// @param {Arglist} $keys - Key chain
+/// @return {*} - Desired value
+@function map-deep-get($map, $keys...) {
+  $top-map: $map;
+
+  // Iterate over all keys
+  @each $key in $keys {
+
+    // If current $map is not a map, assume we finished and return
+    @if type-of($map) != 'map' {
+      @return $map;
+    }
+
+    // Else, make the next $key the new $map
+    $map: map-get($map, $key);
+
+    // If the new $map is null, maybe the $key is mispelled or missing
+    @if type-of($map) == 'null' {
+      @warn 'Nested key '#{$keys}' returned null. Does it exist?';
+    }
+  }
+
+  // After all iterations, return whatever we have in $map
+  @return $map;
+}
+
+/// Gets a duration value.
+/// @param {string} $keys Key(s).
+/// @return {string} Value.
+@function get-duration($keys...) {
+  @return map-deep-get($duration, $keys...);
+}
+
+/// Gets a font value.
+/// @param {string} $keys Key(s).
+/// @return {string} Value.
+@function get-font($keys...) {
+  @return map-deep-get($font, $keys...);
+}
+
+/// Gets a misc value.
+/// @param {string} $keys Key(s).
+/// @return {string} Value.
+@function get-misc($keys...) {
+  @return map-deep-get($misc, $keys...);
+}
+
+/// Gets a colors value.
+/// @param {string} $keys Key(s).
+/// @return {string} Value.
+@function get-color($keys...) {
+  @return map-deep-get($color, $keys...);
+}
+
+/// Gets a size value.
+/// @param {string} $keys Key(s).
+/// @return {string} Value.
+@function get-size($keys...) {
+  @return map-deep-get($size, $keys...);
+}

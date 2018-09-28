@@ -1,0 +1,49 @@
+{
+  "extends": [
+    "stylelint-config-sass-guidelines",
+    "stylelint-rscss/config"
+  ],
+  "rules": {
+    "max-nesting-depth": [
+      3,
+      {
+        "ignoreAtRules": [
+          "media",
+          "supports",
+          "include"
+        ]
+      }
+    ],
+    "order/order": [
+      [
+        "custom-properties",
+        "dollar-variables",
+        {
+          "type": "at-rule",
+          "name": "extend"
+        },
+        {
+          "type": "at-rule",
+          "name": "include",
+          "hasBlock": false
+        },
+        "declarations",
+        {
+          "type": "at-rule",
+          "name": "include",
+          "hasBlock": true
+        },
+        "rules",
+        {
+          "type": "at-rule",
+          "name": "include",
+          "parameter": "mq",
+          "hasBlock": true
+        }
+      ]
+    ],
+    "rscss/no-descendant-combinator": false,
+    "selector-class-pattern": "^_?[a-z0-9\\-]+$",
+    "selector-no-qualifying-type": null
+  }
+}

@@ -1,0 +1,213 @@
+/* stylelint-disable rscss/class-format, rscss/no-descendant-combinator */
+
+/* Disable some stylelint rules because:
+   1. These helpers are used by site editors and we don't need them to learn
+      RSCSS naming conventions to access them.
+   2. Some of these are pulled from Bootstrap, and we want to maintain the
+      names to reference their docs. */
+
+// Hide content but keep it available for screen readers
+._visually-hidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+._text-heading {
+  font-family: get-font(family-heading);
+  font-weight: get-font(weight-light);
+  line-height: 1;
+}
+
+._text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+._text-caps {
+  text-transform: uppercase !important;
+}
+
+._text-left {
+  text-align: left !important;
+}
+
+._text-center {
+  text-align: center !important;
+}
+
+._text-right {
+  text-align: right !important;
+}
+
+._text-small {
+  font-size: 0.8em !important;
+}
+
+._text-big {
+  font-size: 1.4em !important;
+}
+
+._text-muted {
+  color: get-color(fg-light) !important;
+}
+
+._text-color-inherit,
+._text-inherit-color {
+  color: inherit !important;
+}
+
+._text-dotted-underline,
+._text-underline-dotted {
+  text-decoration: underline !important;
+  text-decoration-style: dotted !important;
+}
+
+._text-wide {
+  letter-spacing: 0.1rem;
+}
+
+// Colored text
+@each $i in map-keys(get-color(highlight)) {
+  ._text-style-#{$i} {
+    color: get-color(highlight, $i) !important;
+  }
+}
+
+/* Borders, margins, and paddings
+   Generates borders, margin, and padding classes in all directions
+   Borders will always use border-width from vars.scss
+   Paddings and margins will always be a multiple of element-margin in vars.scss
+
+   ._mb-2 -> Double bottom margin
+   ._pl-4 -> Quad left padding
+   ._bl -> Border left
+ */
+
+$sizes: (
+  (0,		(get-size(element-margin) * 0)),
+  (half,	(get-size(element-margin) * 0.5)),
+  (1,		(get-size(element-margin) * 1)),
+  (2,		(get-size(element-margin) * 2)),
+  (3,		(get-size(element-margin) * 3)),
+  (4,		(get-size(element-margin) * 4))
+);
+
+$directions: (
+  (b, bottom),
+  (l, left),
+  (r, right),
+  (t, top)
+);
+
+@each $dir-key, $dir in $directions {
+  ._b#{$dir-key} { border-#{$dir}: solid get-size(border-width) get-color(border); }
+
+  @each $size-key, $size in $sizes {
+    ._p#{$dir-key}-#{$size-key} { padding-#{$dir}: $size !important; }
+    ._m#{$dir-key}-#{$size-key} { margin-#{$dir}: $size !important; }
+  }
+}
+
+/* Responsive floats */
+
+._float-left,
+.float-left {
+  float: left !important;
+}
+
+._float-right,
+.float-right {
+  float: right !important;
+}
+
+._float-none,
+.float-none {
+  float: none !important;
+}
+
+@each $breakpoint in map-keys($mq-breakpoints) {
+  @include mq($from: $breakpoint) {
+    ._float-#{$breakpoint}-left,
+    .float-#{$breakpoint}-left {
+      float: left !important;
+    }
+
+    ._float-#{$breakpoint}-right,
+    .float-#{$breakpoint}-right {
+      float: right !important;
+    }
+
+    ._float-#{$breakpoint}-none,
+    .float-#{$breakpoint}-none {
+      float: none !important;
+    }
+  }
+}
+
+/* Responsive embeds (thanks Bootstrap 4!)
+   https://github.com/twbs/bootstrap/blob/6a5a83e02c336f6ba73a5dc5cd4cb28cc2f8f497/scss/_responsive-embed.scss */
+
+._embed-responsive,
+.embed-responsive {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  padding: 0;
+  position: relative;
+  width: 100%;
+
+  &::before {
+    content: '';
+    display: block;
+  }
+
+  ._embed-responsive-item,
+  .embed-responsive-item,
+  .mce-object,
+  iframe,
+  embed,
+  object,
+  video {
+    border: 0;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}
+
+._embed-responsive-21by9,
+.embed-responsive-21by9 {
+  &::before {
+    padding-top: percentage(9 / 21);
+  }
+}
+
+._embed-responsive-16by9,
+.embed-responsive-16by9 {
+  &::before {
+    padding-top: percentage(9 / 16);
+  }
+}
+
+._embed-responsive-4by3,
+.embed-responsive-4by3 {
+  &::before {
+    padding-top: percentage(3 / 4);
+  }
+}
+
+._embed-responsive-1by1,
+.embed-responsive-1by1 {
+  &::before {
+    padding-top: percentage(1 / 1);
+  }
+}

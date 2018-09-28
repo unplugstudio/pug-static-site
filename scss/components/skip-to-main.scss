@@ -1,0 +1,23 @@
+/* A simple link to skip to the main page content.
+   Visible only when tabbing with the keyboard */
+
+.skip-to-main {
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  left: 0;
+  margin: 0;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  top: 0;
+  width: 1px;
+
+  &:focus {
+    background-color: get-color(bg);
+    clip: auto;
+    height: auto;
+    padding: 1rem;
+    width: auto;
+    z-index: 1;
+  }
+}

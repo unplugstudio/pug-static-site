@@ -1,0 +1,33 @@
+ol {
+  list-style: decimal;
+  margin: 0 0 get-size(element-margin) 0;
+  padding-left: 1.25rem;
+
+  > li {
+    padding-left: 0.25rem;
+  }
+}
+
+ul {
+  list-style: disc;
+  margin: 0 0 get-size(element-margin) 0;
+  padding-left: 1rem;
+
+  > li {
+    padding-left: 0.5rem;
+  }
+}
+
+dl {
+  margin: 0 0 get-size(element-margin) 0;
+
+  > dt {
+    display: block;
+    font-weight: get-font(weight-bold);
+    margin: 0 0 (get-size(element-margin) * 0.5) 0;
+  }
+
+  > dd {
+    margin-left: get-size(element-margin);
+  }
+}

@@ -1,0 +1,30 @@
+$padding: get-size(element-margin);
+
+.panel-item {
+  @include padding($padding, $padding);
+
+  background-color: get-color(bg);
+  border: solid get-size(border-width) get-color(border);
+  border-radius: get-size(border-radius);
+  margin-bottom: get-size(element-margin);
+
+  &.-alt {
+    background-color: get-color(bg-alt);
+    border: 0;
+  }
+
+  // Generate all color variations
+  @each $i in map-keys(get-color(highlight)) {
+    // stylelint-disable-next-line rscss/class-format
+    &.-style-#{$i} {
+      background-color: get-color(highlight, $i);
+      border: 0;
+      color: #fff;
+
+      // stylelint-disable-next-line
+      h2, h3, h4, h5, h6, a, strong {
+        color: inherit;
+      }
+    }
+  }
+}

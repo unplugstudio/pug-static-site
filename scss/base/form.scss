@@ -1,0 +1,135 @@
+/* stylelint-disable rscss/class-format,  rscss/no-descendant-combinator */
+
+/* We disable the RSCSS guidelines because this classes are
+given names by Mezzanine, not us. */
+
+form {
+  margin: 0 0 get-size(element-margin) 0;
+}
+
+.form-group {
+  margin-bottom: get-size(element-margin);
+}
+
+.input-group {
+  display: flex;
+
+  .button {
+    white-space: nowrap;
+  }
+
+  &.-responsive {
+    @include mq($until: sm) {
+      display: block;
+
+      input {
+        margin-bottom: 1rem;
+        text-align: center;
+      }
+
+      .button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+.help-block {
+  color: get-color(fg-light);
+  font-size: 0.95em;
+  font-style: italic;
+  margin-bottom: 0;
+  margin-top: 0.5em;
+
+  .has-error & {
+    color: get-color(state, error);
+  }
+}
+
+label {
+  display: block;
+  margin: 0 0 (get-size(element-margin) * 0.25) 0;
+
+  &[for] {
+    cursor: pointer;
+  }
+
+  .has-error & {
+    color: get-color(state, error);
+  }
+}
+
+[type='text'],
+[type='search'],
+[type='password'],
+[type='email'],
+[type='date'],
+[type='number'],
+select,
+textarea {
+  background-color: get-color(bg);
+  border: solid get-size(border-width) get-color(border);
+  border-radius: get-size(border-radius);
+  color: inherit;
+  display: block;
+  outline: 0;
+  padding: 0 0.5em;
+  text-decoration: none;
+  width: 100%;
+
+  &.-placeholder-caps {
+    &::placeholder {
+      text-transform: uppercase;
+    }
+  }
+
+  &.-alt {
+    background-color: transparent;
+    border-color: currentColor;
+
+    &::placeholder {
+      color: inherit;
+    }
+  }
+
+  &:invalid {
+    box-shadow: none;
+  }
+
+  &:focus {
+    border-color: get-color(highlight, 1);
+    box-shadow: 0 0 0 get-size(border-width) get-color(highlight, 1);
+  }
+
+  .mezzanine-form & {
+    max-width: 350px;
+  }
+
+  .has-error & {
+    border-color: rgba(get-color(state, error), 0.75);
+
+    &:focus {
+      border-color: get-color(state, error);
+      box-shadow: 0 0 0 get-size(border-width) get-color(state, error);
+    }
+  }
+}
+
+[type='text'],
+[type='search'],
+[type='password'],
+[type='email'],
+[type='date'],
+[type='number'],
+select {
+  height: get-size(element-height);
+}
+
+textarea {
+  padding: 0.75em 1em;
+}
+
+::placeholder {
+  color: get-color(fg-light);
+  opacity: 1;
+}

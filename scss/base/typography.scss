@@ -1,0 +1,169 @@
+body {
+  background-color: get-color(bg);
+  color: get-color(fg);
+}
+
+html,
+body,
+input,
+select,
+textarea,
+button {
+  font-family: get-font(family);
+  font-size: 14.5px;
+  font-weight: get-font(weight);
+  line-height: 1.6;
+}
+
+a {
+  color: get-color(highlight, 1);
+  cursor: pointer;
+  text-decoration: none;
+  transition: color get-duration(medium), border-color get-duration(medium);
+
+  &:active,
+  &:focus,
+  &:hover {
+    color: get-color(highlight, 1);
+    text-decoration: underline;
+  }
+}
+
+strong,
+b {
+  font-weight: get-font(weight-bold);
+}
+
+em,
+i {
+  font-style: italic;
+}
+
+p {
+  margin: 0 0 get-size(element-margin) 0;
+}
+
+// stylelint-disable-next-line
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  margin: 0 0 (get-size(element-margin) * 0.5) 0;
+
+  ul + &,
+  ol + &,
+  p + & {
+    margin-top: (get-size(element-margin) * 1.2);
+  }
+
+  > a {
+    color: inherit;
+  }
+
+  &.-underlined {
+    border-bottom: solid get-size(border-width) get-color(border);
+    margin-bottom: get-size(element-margin);
+    padding-bottom: 1rem;
+  }
+}
+
+h1,
+.h1 {
+  font-family: get-font(family-heading);
+  font-size: 3rem;
+  font-weight: get-font(weight-light);
+  line-height: 1.15;
+
+  @include mq($from: md) {
+    font-size: 3.6rem;
+  }
+}
+
+h2,
+.h2 {
+  font-family: get-font(family-heading);
+  font-size: 2.86rem;
+  font-weight: get-font(weight-light);
+  line-height: 1.4;
+}
+
+h3,
+.h3 {
+  font-family: get-font(family-heading);
+  font-size: 2rem;
+  font-weight: get-font(weight-light);
+  line-height: 1.27;
+}
+
+h4,
+.h4 {
+  font-family: get-font(family-heading);
+  font-size: 1.5rem;
+  font-weight: get-font(weight-light);
+  line-height: 1.33;
+}
+
+h5,
+.h5 {
+  font-family: get-font(family-heading);
+  font-size: 1.2rem;
+  font-weight: get-font(weight-light);
+  line-height: 1.53;
+}
+
+h6,
+.h6 {
+  font-family: get-font(family-heading);
+  font-size: 0.85rem;
+  font-weight: get-font(weight-light);
+}
+
+sub {
+  font-size: 0.8em;
+  position: relative;
+  top: 0.5em;
+}
+
+sup {
+  font-size: 0.8em;
+  position: relative;
+  top: -0.5em;
+}
+
+blockquote {
+  border-left: solid (get-size(border-width) * 4) get-color(border);
+  font-style: italic;
+  margin: 0 0 get-size(element-margin) 0;
+  padding: (get-size(element-margin) / 4) 0 (get-size(element-margin) / 4) get-size(element-margin);
+}
+
+code {
+  background-color: get-color(border-bg);
+  border: solid get-size(border-width) get-color(border);
+  border-radius: get-size(border-radius);
+  font-family: get-font(family-fixed);
+  font-size: 0.9em;
+  margin: 0 0.25em;
+  padding: 0.25em 0.65em;
+}
+
+pre {
+  font-family: get-font(family-fixed);
+  font-size: 0.9em;
+  margin: 0 0 get-size(element-margin) 0;
+  -webkit-overflow-scrolling: touch;
+
+  > code {
+    display: block;
+    line-height: 1.75;
+    overflow-x: auto;
+    padding: 1em 1.5em;
+  }
+}
+
+hr {
+  border: 0;
+  border-bottom: solid get-size(border-width) get-color(border);
+  margin: get-size(element-margin) 0;
+
+  &.-major {
+    margin: (get-size(element-margin) * 1.5) 0;
+  }
+}

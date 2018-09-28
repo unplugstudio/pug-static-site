@@ -1,0 +1,32 @@
+/* stylelint-disable max-nesting-depth */
+
+.list-inline {
+  list-style: none;
+  padding-left: 0;
+
+  > li {
+    display: inline-block;
+    margin-right: (get-size(element-margin) * 0.5);
+    padding: 0;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  &.-separated {
+    > li {
+      &::after {
+        content: '|';
+        display: inline-block;
+        margin-left: (get-size(element-margin) * 0.5);
+      }
+
+      &:last-child {
+        &::after {
+          display: none;
+        }
+      }
+    }
+  }
+}
