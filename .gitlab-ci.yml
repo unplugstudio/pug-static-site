@@ -1,0 +1,17 @@
+image: node:8
+
+before_script:
+  - npm install -g npm@latest
+  - npm ci
+
+cache:
+  paths:
+    - .npm/
+
+test:lint:
+  script:
+    - npm run lint
+
+test:build:
+  script:
+    - npm run build
