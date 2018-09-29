@@ -1,27 +1,29 @@
-import BrowserSyncPlugin from 'browser-sync-webpack-plugin'
-import MiniCssExtractPlugin from 'mini-css-extract-plugin'
+import ExtractCssChunks from 'extract-css-chunks-webpack-plugin'
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import { resolve } from 'path'
-import WebpackAssetsManifestPlugin from 'webpack-assets-manifest'
+import webpack from 'webpack'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 
 export default (env, argv) => {
   const isDev = argv.mode === 'development'
   const options = { sourceMap: isDev }
+  const templateNames = ['index.html', 'elements.html']
+  const htmlPlugins = templateNames.map(
+    template =>
+      new HtmlWebpackPlugin({
+        filename: template,
+        template: `templates/${template}`
+      })
+  )
 
-  const devPlugins = [
-    new BrowserSyncPlugin({
-      server: true,
-      files: ['*.html'] // Also reload when HTML files change
-    })
-  ]
-  const prodPlugins = [
-    new WebpackAssetsManifestPlugin(),
-    new OptimizeCssAssetsPlugin()
-  ]
+  const devPlugins = [new webpack.HotModuleReplacementPlugin()]
+  const prodPlugins = [new OptimizeCssAssetsPlugin()]
   const plugins = [
-    new MiniCssExtractPlugin({
-      filename: isDev ? '[name].css' : '[name].[chunkhash].css'
-    })
+    new ExtractCssChunks({
+      filename: isDev ? '[name].css' : '[name].[chunkhash].css',
+      hot: isDev
+    }),
+    ...htmlPlugins
   ].concat(isDev ? devPlugins : prodPlugins)
 
   return {
@@ -30,11 +32,14 @@ export default (env, argv) => {
       path: resolve(__dirname, 'dist'),
       filename: isDev ? '[name].js' : '[name].[chunkhash].js'
     },
+    devServer: {
+      hot: true
+    },
     module: {
       rules: [
         {
           test: /\.js$/,
-          exclude: /node_modules\/(?!(fr-accordion|fr-offcanvas)\/).*/,
+          exclude: /node_modules/,
           use: {
             loader: 'babel-loader'
           }
@@ -42,7 +47,7 @@ export default (env, argv) => {
         {
           test: /\.s?css$/,
           use: [
-            { loader: MiniCssExtractPlugin.loader, options },
+            { loader: ExtractCssChunks.loader, options },
             { loader: 'css-loader', options },
             { loader: 'postcss-loader', options },
             { loader: 'sass-loader', options }
