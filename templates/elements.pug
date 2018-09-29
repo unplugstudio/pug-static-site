@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Elements</title>
-</head>
-<body>
+extends _layout.pug
 
-<!-- Main -->
-<section id="main" class="section-wrapper">
-  <div class="container">
+block content
+  section#main.section-wrapper
+    .container
 
-    <!-- Content -->
       <h2 id="content">Sample Content</h2>
       <p>Praesent ac adipiscing ullamcorper semper ut amet ac risus. Lorem sapien ut odio odio nunc. Ac adipiscing nibh porttitor erat risus justo adipiscing adipiscing amet placerat accumsan. Vis. Faucibus odio magna tempus adipiscing a non. In mi primis arcu ut non accumsan vivamus ac blandit adipiscing adipiscing arcu metus praesent turpis eu ac lacinia nunc ac commodo gravida adipiscing eget accumsan ac nunc adipiscing adipiscing.</p>
       <div class="row">
@@ -39,19 +30,15 @@
         </div>
       </div>
 
-    <hr class="-major" />
+      <hr class="-major" />
 
-    <!-- Elements -->
       <h2 id="elements">Elements</h2>
       <div class="row">
         <div class="col-md-6">
 
           <!-- Text stuff -->
             <h3>Text</h3>
-            <p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>.
-            This is <sup>superscript</sup> text and this is <sub>subscript</sub> text.
-            This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>.
-            Finally, this is a <a href="#">link</a>.</p>
+            <p>This is <b>bold</b> and this is <strong>strong</strong>. This is <i>italic</i> and this is <em>emphasized</em>. This is <sup>superscript</sup> text and this is <sub>subscript</sub> text. This is <u>underlined</u> and this is code: <code>for (;;) { ... }</code>. Finally, this is a <a href="#">link</a>.</p>
             <hr />
             <h2>Heading Level 2</h2>
             <h3>Heading Level 3</h3>
@@ -267,22 +254,17 @@
 
           <!-- Preformatted Code -->
             <h3>Preformatted</h3>
-            <pre><code>i = 0;
+            pre
+              code.
+                i = 0;
 
-while (!deck.isInOrder()) {
-print 'Iteration ' + i;
-deck.shuffle();
-i++;
-}
+                while (!deck.isInOrder()) {
+                print 'Iteration ' + i;
+                deck.shuffle();
+                i++;
+                }
 
-print 'It took ' + i + ' iterations to sort the deck.';
-</code></pre>
+                print 'It took ' + i + ' iterations to sort the deck.';
 
         </div>
       </div>
-
-  </div>
-</section>
-
-</body>
-</html>

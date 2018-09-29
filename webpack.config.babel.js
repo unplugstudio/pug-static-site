@@ -1,20 +1,29 @@
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin'
 import OptimizeCssAssetsPlugin from 'optimize-css-assets-webpack-plugin'
 import { resolve } from 'path'
+import glob from 'glob'
 import webpack from 'webpack'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+
+/**
+ * Create an instance of HtmlWebpackPlugin for each .pug file inside templates/
+ * Excludes files starting with an underscore
+ * @returns Array of HtmlWebpackPlugin instances
+ */
+function instantiateHtmlPlugins() {
+  const templateNames = glob.sync('templates/**/[^_]*.pug')
+  return templateNames.map(
+    template =>
+      new HtmlWebpackPlugin({
+        filename: template.replace(/templates\/(.+)\.pug$/, '$1.html'),
+        template
+      })
+  )
+}
 
 export default (env, argv) => {
   const isDev = argv.mode === 'development'
   const options = { sourceMap: isDev }
-  const templateNames = ['index.html', 'elements.html']
-  const htmlPlugins = templateNames.map(
-    template =>
-      new HtmlWebpackPlugin({
-        filename: template,
-        template: `templates/${template}`
-      })
-  )
 
   const devPlugins = [new webpack.HotModuleReplacementPlugin()]
   const prodPlugins = [new OptimizeCssAssetsPlugin()]
@@ -23,7 +32,7 @@ export default (env, argv) => {
       filename: isDev ? '[name].css' : '[name].[chunkhash].css',
       hot: isDev
     }),
-    ...htmlPlugins
+    ...instantiateHtmlPlugins()
   ].concat(isDev ? devPlugins : prodPlugins)
 
   return {
@@ -56,6 +65,10 @@ export default (env, argv) => {
         {
           test: /\.(jpe?g|png|gif|eot|svg|ttf|woff|woff2|mp4|webm)$/,
           loader: 'file-loader'
+        },
+        {
+          test: /\.(pug|html)$/,
+          loader: 'pug-loader'
         }
       ]
     },
