@@ -67,7 +67,7 @@ export default (env, argv) => {
           loader: 'file-loader'
         },
         {
-          test: /\.(pug|html)$/,
+          test: /\.pug$/,
           loader: 'pug-loader'
         }
       ]
