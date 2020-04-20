@@ -16,7 +16,7 @@ git commit -m "Initial commit based on static-starter"
 
 ## Resulting output
 
-For each `.pug` file in the `templates` directory Webpack will generate an `.html` file with the same name. It will respect folders as well. Files that start with an underscore, like `_example.com` will NOT generate an HTML file (useful for partial and layout templates).
+For each `.pug` file in the `templates` directory Webpack will generate an `.html` file with the same name. It will respect folders as well. Files that start with an underscore, like `_example.pug` will NOT generate an HTML file (useful for partial and layout templates).
 
 Keep in mind that if you add new `.pug` files you'll need to restart Webpack for them to be generated.
 
